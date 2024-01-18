@@ -540,6 +540,7 @@ local on_attach = function(client, bufnr)
 
   nmap("<leader>lr", vim.lsp.buf.rename, "[L]SP [R]ename")
   nmap("<leader>a", vim.lsp.buf.code_action, "Code [A]ction")
+  nmap("<leader>lf", vim.lsp.buf.format, "[L]sp [F]ormat")
 
   nmap("<leader><leader>", vim.lsp.buf.definition, "Goto Definition (gd alternate)")
   nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
