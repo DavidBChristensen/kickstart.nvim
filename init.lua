@@ -750,7 +750,7 @@ vim.keymap.set({ "n", "v" }, "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "N
 
 -- [[Configure ToggleTerm]]
 require("toggleterm").setup {
-  size = 94,
+  size = 110,
   open_mapping = [[<C-\>]],
 }
 vim.keymap.set({ "n", "v" }, "<leader>t", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "[T]oggleTerm" })
