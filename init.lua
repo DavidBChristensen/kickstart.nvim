@@ -8,37 +8,15 @@
 
 --]]
 
+-- Get the directory of the current script and set the package path
+local scriptPath = debug.getinfo(1).source:match("@?(.*[\\/])")
+package.path = scriptPath .. "?.lua;" .. package.path
+
 --  NOTE: Setting the leader key must happen before plugins are required (otherwise will use wrong leader)
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
--- [[ Install `lazy.nvim` plugin manager ]]
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  }
-end
-
-vim.opt.rtp:prepend(lazypath)
-
--- [[ Configure plugins ]]
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
-require("lazy").setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
+require("lazyConfig").setup({
   -- Git related plugins
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
@@ -46,8 +24,8 @@ require("lazy").setup({
   -- Detect tabstop and shiftwidth automatically
   "tpope/vim-sleuth",
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
+  -- This is where your plugins related to LSP can be installed.
+  -- The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
@@ -165,7 +143,7 @@ require("lazy").setup({
   { "arturgoms/moonbow.nvim" },
 
   {
-    "nvim-lualine/lualine.nvim", -- Set lualine as statusline. See `:help lualine.txt`
+    "nvim-lualine/lualine.nvim",   -- Set lualine as statusline. See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
@@ -176,7 +154,7 @@ require("lazy").setup({
     },
   },
 
-  { "numToStr/Comment.nvim",                     opts = {} }, -- "gc" to comment visual regions/lines
+  { "numToStr/Comment.nvim",                     opts = {} },   -- "gc" to comment visual regions/lines
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -216,7 +194,7 @@ require("lazy").setup({
     build = ":TSUpdate",
   },
 
-  -- TODO(dchristensen) move these to the custom plugins and figure out how to cofigure them
+  -- TODO(dchristensen) move these to the custom plugins and figure out how to configure them
 
   { "MunifTanjim/nui.nvim" },
   { "nvim-lua/plenary.nvim" },
@@ -229,27 +207,12 @@ require("lazy").setup({
     branch = "v2.x",
     requires = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "nvim-tree/nvim-web-devicons",   -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
     }
   },
-
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require "kickstart.plugins.autoformat",
-  -- require "kickstart.plugins.debug",
-  --
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  --{ import = "custom.plugins" },
-}, {})
-
+}
+)
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -674,13 +637,14 @@ require("toggleterm").setup {
   size = 110,
   open_mapping = [[<C-\>]],
 }
+
 vim.keymap.set({ "n", "v" }, "<leader>t", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "[T]oggleTerm" })
 vim.keymap.set("t", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "[T]oggleTerm" })
 vim.keymap.set("t", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neotr[ee]" })
-vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Move to window left" })
-vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Move to window down" })
-vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Move to window up" })
-vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Move to window right" })
+vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Focus on window to left" })
+vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Focus on window to right" })
+vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Focus on window above" })
+vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Focus on window below" })
 
 -- [[Configure Hop]]
 require("hop").setup()
