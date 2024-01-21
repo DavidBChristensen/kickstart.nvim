@@ -12,149 +12,12 @@
 local scriptPath = debug.getinfo(1).source:match("@?(.*[\\/])")
 package.path = scriptPath .. "?.lua;" .. package.path
 
---  NOTE: Setting the leader key must happen before plugins are required (otherwise will use wrong leader)
+--  NOTE: Setting the leader key must happen before plugins are required (otherwise plugins will use wrong
+--  leader)
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
-require("lazyConfig").setup({
-  -- Git related plugins
-  "tpope/vim-fugitive",
-  "tpope/vim-rhubarb",
-
-  -- Detect tabstop and shiftwidth automatically
-  "tpope/vim-sleuth",
-
-  -- This is where your plugins related to LSP can be installed.
-  -- The configuration is done below. Search for lspconfig to find it below.
-  {
-    -- LSP Configuration & Plugins
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
-      { "j-hui/fidget.nvim",       opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      "folke/neodev.nvim",
-    },
-  },
-
-  {
-    -- Autocompletion
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-
-      -- Adds LSP completion capabilities
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-
-      -- Adds a number of user-friendly snippets
-      "rafamadriz/friendly-snippets",
-    },
-  },
-
-  -- Useful plugin to show you pending keybinds.
-  { "folke/which-key.nvim",  opts = {} },
-
-  {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
-    "lewis6991/gitsigns.nvim",
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-      },
-      on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
-
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
-        end
-
-        -- Navigation
-        map({ "n", "v" }, "]c", function()
-          if vim.wo.diff then
-            return "]c"
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return "<Ignore>"
-        end, { expr = true, desc = "Jump to next hunk" })
-
-        map({ "n", "v" }, "[c", function()
-          if vim.wo.diff then
-            return "[c"
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return "<Ignore>"
-        end, { expr = true, desc = "Jump to previous hunk" })
-
-        -- Actions
-        -- visual mode
-        map("v", "<leader>hs", function()
-          gs.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
-        end, { desc = "stage git hunk" })
-        map("v", "<leader>hr", function()
-          gs.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
-        end, { desc = "reset git hunk" })
-        -- normal mode
-        map("n", "<leader>hs", gs.stage_hunk, { desc = "git stage hunk" })
-        map("n", "<leader>hr", gs.reset_hunk, { desc = "git reset hunk" })
-        map("n", "<leader>hS", gs.stage_buffer, { desc = "git Stage buffer" })
-        map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
-        map("n", "<leader>hR", gs.reset_buffer, { desc = "git Reset buffer" })
-        map("n", "<leader>hp", gs.preview_hunk, { desc = "preview git hunk" })
-        map("n", "<leader>hb", function()
-          gs.blame_line { full = false }
-        end, { desc = "git blame line" })
-        map("n", "<leader>hd", gs.diffthis, { desc = "git diff against index" })
-        map("n", "<leader>hD", function()
-          gs.diffthis "~"
-        end, { desc = "git diff against last commit" })
-
-        -- Toggles
-        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "toggle git blame line" })
-        map("n", "<leader>td", gs.toggle_deleted, { desc = "toggle git show deleted" })
-
-        -- Text object
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select git hunk" })
-      end,
-    },
-  },
-
-  -- gruvbox and moonbow themes... only the best
-  --{ "ellisonleao/gruvbox.nvim", priority = 1000 },
-  { "arturgoms/moonbow.nvim" },
-
-  {
-    "nvim-lualine/lualine.nvim",   -- Set lualine as statusline. See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = "moonbow",
-        component_separators = "|",
-        section_separators = "",
-      },
-    },
-  },
-
-  { "numToStr/Comment.nvim",                     opts = {} },   -- "gc" to comment visual regions/lines
+pluginsToLoad = {
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -180,7 +43,6 @@ require("lazyConfig").setup({
     },
   },
 
-
   -- Telescope project extension
   { "nvim-telescope/telescope-project.nvim" },
   { "nvim-telescope/telescope-file-browser.nvim" },
@@ -194,71 +56,35 @@ require("lazyConfig").setup({
     build = ":TSUpdate",
   },
 
-  -- TODO(dchristensen) move these to the custom plugins and figure out how to configure them
+  { "phaazon/hop.nvim",            branch = "v2", },
+  { "akinsho/toggleterm.nvim",     version = "*", config = true },
 
   { "MunifTanjim/nui.nvim" },
   { "nvim-lua/plenary.nvim" },
   { "nvim-tree/nvim-web-devicons" },
-  { "phaazon/hop.nvim",            branch = "v2", },
-  { "akinsho/toggleterm.nvim",     version = "*", config = true },
   { "lvimuser/lsp-inlayhints.nvim" },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",   -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
   },
 }
-)
 
--- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
+require("vim-fugitiveConfig")
+require("vim-rhubarbConfig")
+require("vim-sleuthConfig")
+require("nvim-lspconfigConfig")
+require("commentConfig")
+require("nvim-cmpConfig")
+require("which-keyConfig")
+require("gitsignsConfig")
+require("moonbowConfig")
+require("lualineConfig")
 
-vim.o.background = "light"             -- or "light" for light mode
-vim.o.hlsearch = false                 -- Set highlight on search
-vim.wo.number = true                   -- Make line numbers default
-vim.o.mouse = "a"                      -- Enable mouse mode
-vim.o.breakindent = true               -- Enable break indent
-vim.o.undofile = true                  -- Save undo history
-vim.wo.signcolumn = "yes"              -- Keep signcolumn on by default
-vim.o.completeopt = "menuone,noselect" -- Set completeopt to have a better completion experience
+--require("gruvboxConfig")
 
-vim.o.scrolloff = 8
-vim.o.colorcolumn = "110"
+require("lazyConfig").setup(pluginsToLoad)
 
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help "clipboard"`
-vim.o.clipboard = "unnamedplus"
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeout = true
-vim.o.timeoutlen = 300
-vim.o.relativenumber = true
-vim.o.wrap = false
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = "*",
-})
+require("vimOptions")
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
