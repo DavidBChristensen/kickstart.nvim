@@ -18,55 +18,13 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 pluginsToLoad = {
-
-  -- Fuzzy Finder (files, lsp, etc)
-  {
-    "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-      -- Only load if `make` is available. Make sure you have the system
-      -- requirements installed.
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        -- build = "make",
-
-        build =
-        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-        cond = function()
-          return vim.fn.executable "make" == 1
-        end,
-      },
-    },
-  },
-
-  -- Telescope project extension
-  { "nvim-telescope/telescope-project.nvim" },
-  { "nvim-telescope/telescope-file-browser.nvim" },
-
-  {
-    -- Highlight, edit, and navigate code
-    "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    build = ":TSUpdate",
-  },
-
   { "phaazon/hop.nvim",            branch = "v2", },
-  { "akinsho/toggleterm.nvim",     version = "*", config = true },
-
+  { "akinsho/toggleterm.nvim",     version = "*",   config = true },
   { "MunifTanjim/nui.nvim" },
   { "nvim-lua/plenary.nvim" },
   { "nvim-tree/nvim-web-devicons" },
   { "lvimuser/lsp-inlayhints.nvim" },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-  },
+  { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", },
 }
 
 require("vim-fugitiveConfig")
@@ -78,12 +36,12 @@ require("nvim-cmpConfig")
 require("which-keyConfig")
 require("gitsignsConfig")
 require("moonbowConfig")
-require("lualineConfig")
-
 --require("gruvboxConfig")
+require("lualineConfig")
+require("telescopeConfig")
+require("nvim-treesitterConfig")
 
 require("lazyConfig").setup(pluginsToLoad)
-
 require("vimOptions")
 
 -- [[ Configure Telescope ]]
