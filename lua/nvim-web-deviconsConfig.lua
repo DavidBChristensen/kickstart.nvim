@@ -1,5 +1,5 @@
 local M = {}
 
-table.insert(pluginsToLoad, { "nvim-tree/nvim-web-devicons" })
+table.insert(PluginsToLoad, { "nvim-tree/nvim-web-devicons" })
 
 return M

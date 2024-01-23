@@ -2,6 +2,6 @@
 
 local M = {}
 
-table.insert(pluginsToLoad, { "folke/which-key.nvim", opts = {} })
+table.insert(PluginsToLoad, { "folke/which-key.nvim", opts = {} })
 
 return M

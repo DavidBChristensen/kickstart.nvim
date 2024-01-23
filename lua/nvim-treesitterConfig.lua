@@ -2,7 +2,7 @@
 
 local M = {}
 
-table.insert(pluginsToLoad,
+table.insert(PluginsToLoad,
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {

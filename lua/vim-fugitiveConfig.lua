@@ -1,5 +1,5 @@
 local M = {}
 
-table.insert(pluginsToLoad, "tpope/vim-fugitive")
+table.insert(PluginsToLoad, "tpope/vim-fugitive")
 
 return M

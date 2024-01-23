@@ -2,7 +2,7 @@
 
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = {
@@ -27,8 +27,8 @@ table.insert(pluginsToLoad, {
 )
 
 -- Telescope project extensions
-table.insert(pluginsToLoad, { "nvim-telescope/telescope-project.nvim" })
-table.insert(pluginsToLoad, { "nvim-telescope/telescope-file-browser.nvim" }
+table.insert(PluginsToLoad, { "nvim-telescope/telescope-project.nvim" })
+table.insert(PluginsToLoad, { "nvim-telescope/telescope-file-browser.nvim" }
 
 )
 

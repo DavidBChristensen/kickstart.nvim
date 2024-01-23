@@ -1,5 +1,5 @@
 local M = {}
 
-table.insert(pluginsToLoad, { "nvim-lua/plenary.nvim" })
+table.insert(PluginsToLoad, { "nvim-lua/plenary.nvim" })
 
 return M

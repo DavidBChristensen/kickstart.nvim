@@ -2,7 +2,7 @@
 
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   "hrsh7th/nvim-cmp",
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source

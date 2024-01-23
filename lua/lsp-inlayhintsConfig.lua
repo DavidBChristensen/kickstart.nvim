@@ -1,5 +1,5 @@
 local M = {}
 
-table.insert(pluginsToLoad, { "lvimuser/lsp-inlayhints.nvim" })
+table.insert(PluginsToLoad, { "lvimuser/lsp-inlayhints.nvim" })
 
 return M

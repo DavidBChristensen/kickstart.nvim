@@ -1,5 +1,5 @@
 local M = {}
 
-table.insert(pluginsToLoad, "tpope/vim-rhubarb")
+table.insert(PluginsToLoad, "tpope/vim-rhubarb")
 
 return M

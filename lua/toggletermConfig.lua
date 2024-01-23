@@ -1,6 +1,6 @@
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   "akinsho/toggleterm.nvim",
   version = "*",
   config = true

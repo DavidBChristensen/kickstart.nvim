@@ -1,6 +1,6 @@
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v2.x",
 }

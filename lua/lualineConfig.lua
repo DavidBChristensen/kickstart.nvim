@@ -3,7 +3,7 @@
 
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   "nvim-lualine/lualine.nvim",
   opts = {
     options = {

@@ -18,7 +18,7 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 -- [[ Enter plugins into list to load ]]
-pluginsToLoad = {
+PluginsToLoad = {
   "lua.vim-fugitiveConfig",
   "lua.vim-rhubarbConfig",
   "lua.vim-sleuthConfig",
@@ -41,12 +41,12 @@ pluginsToLoad = {
   "lua.neo-treeConfig",
 }
 
-for i = 1, #pluginsToLoad do
-  require(pluginsToLoad[i])
+for i = 1, #PluginsToLoad do
+  require(PluginsToLoad[i])
 end
 
 -- [[ Configure lazy config and setup the plugins to load ]]
-require("lua.lazyConfig").setup(pluginsToLoad)
+require("lua.lazyConfig").setup(PluginsToLoad)
 
 -- [[ Configure vim options ]]
 require("lua.vimOptions")

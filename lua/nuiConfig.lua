@@ -1,5 +1,5 @@
 local M = {}
 
-table.insert(pluginsToLoad, { "MunifTanjim/nui.nvim" })
+table.insert(PluginsToLoad, { "MunifTanjim/nui.nvim" })
 
 return M

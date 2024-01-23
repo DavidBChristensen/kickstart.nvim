@@ -1,6 +1,6 @@
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   "phaazon/hop.nvim",
   branch = "v2",
 }

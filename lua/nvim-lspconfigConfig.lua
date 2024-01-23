@@ -2,7 +2,7 @@
 -- The configuration is done below. Search for lspconfig to find it below.
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   -- LSP Configuration & Plugins
   "neovim/nvim-lspconfig",
   dependencies = {

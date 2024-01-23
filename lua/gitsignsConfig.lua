@@ -2,7 +2,7 @@
 
 local M = {}
 
-table.insert(pluginsToLoad, {
+table.insert(PluginsToLoad, {
   "lewis6991/gitsigns.nvim",
   opts = {
     -- See `:help gitsigns.txt`

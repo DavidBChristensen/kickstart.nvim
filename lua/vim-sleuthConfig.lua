@@ -2,6 +2,6 @@
 
 local M = {}
 
-table.insert(pluginsToLoad, "tpope/vim-sleuth")
+table.insert(PluginsToLoad, "tpope/vim-sleuth")
 
 return M
