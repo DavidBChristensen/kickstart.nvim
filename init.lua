@@ -17,17 +17,8 @@ package.path = scriptPath .. "?.lua;" .. package.path
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
-pluginsToLoad = {
-  { "phaazon/hop.nvim",            branch = "v2", },
-  { "akinsho/toggleterm.nvim",     version = "*",   config = true },
-  { "MunifTanjim/nui.nvim" },
-  { "nvim-lua/plenary.nvim" },
-  { "nvim-tree/nvim-web-devicons" },
-  { "lvimuser/lsp-inlayhints.nvim" },
-  { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", },
-}
-
 -- [[ Enter plugins into list to load ]]
+pluginsToLoad = { }
 require("lua.vim-fugitiveConfig")
 require("lua.vim-rhubarbConfig")
 require("lua.vim-sleuthConfig")
@@ -41,6 +32,13 @@ require("lua.moonbowConfig")
 require("lua.lualineConfig")
 require("lua.telescopeConfig")
 require("lua.nvim-treesitterConfig")
+require("lua.hopConfig")
+require("lua.toggletermConfig")
+require("lua.nuiConfig")
+require("lua.plenaryConfig")
+require("lua.nvim-web-deviconsConfig")
+require("lua.lsp-inlayhintsConfig")
+require("lua.neo-treeConfig")
 
 -- [[ Configure lazy config and setup the plugins to load ]]
 require("lua.lazyConfig").setup(pluginsToLoad)
