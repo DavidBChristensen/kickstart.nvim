@@ -27,22 +27,26 @@ pluginsToLoad = {
   { "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", },
 }
 
-require("vim-fugitiveConfig")
-require("vim-rhubarbConfig")
-require("vim-sleuthConfig")
-require("nvim-lspconfigConfig")
-require("commentConfig")
-require("nvim-cmpConfig")
-require("which-keyConfig")
-require("gitsignsConfig")
-require("moonbowConfig")
---require("gruvboxConfig")
-require("lualineConfig")
-require("telescopeConfig")
-require("nvim-treesitterConfig")
+-- [[ Enter plugins into list to load ]]
+require("lua.vim-fugitiveConfig")
+require("lua.vim-rhubarbConfig")
+require("lua.vim-sleuthConfig")
+require("lua.nvim-lspconfigConfig")
+require("lua.commentConfig")
+require("lua.nvim-cmpConfig")
+require("lua.which-keyConfig")
+require("lua.gitsignsConfig")
+require("lua.moonbowConfig")
+--require("lua.gruvboxConfig")
+require("lua.lualineConfig")
+require("lua.telescopeConfig")
+require("lua.nvim-treesitterConfig")
 
-require("lazyConfig").setup(pluginsToLoad)
-require("vimOptions")
+-- [[ Configure lazy config and setup the plugins to load ]]
+require("lua.lazyConfig").setup(pluginsToLoad)
+
+-- [[ Configure vim options ]]
+require("lua.vimOptions")
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
