@@ -18,27 +18,32 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 -- [[ Enter plugins into list to load ]]
-pluginsToLoad = { }
-require("lua.vim-fugitiveConfig")
-require("lua.vim-rhubarbConfig")
-require("lua.vim-sleuthConfig")
-require("lua.nvim-lspconfigConfig")
-require("lua.commentConfig")
-require("lua.nvim-cmpConfig")
-require("lua.which-keyConfig")
-require("lua.gitsignsConfig")
-require("lua.moonbowConfig")
---require("lua.gruvboxConfig")
-require("lua.lualineConfig")
-require("lua.telescopeConfig")
-require("lua.nvim-treesitterConfig")
-require("lua.hopConfig")
-require("lua.toggletermConfig")
-require("lua.nuiConfig")
-require("lua.plenaryConfig")
-require("lua.nvim-web-deviconsConfig")
-require("lua.lsp-inlayhintsConfig")
-require("lua.neo-treeConfig")
+pluginsToLoad = {
+  "lua.vim-fugitiveConfig",
+  "lua.vim-rhubarbConfig",
+  "lua.vim-sleuthConfig",
+  "lua.nvim-lspconfigConfig",
+  "lua.commentConfig",
+  "lua.nvim-cmpConfig",
+  "lua.which-keyConfig",
+  "lua.gitsignsConfig",
+  "lua.moonbowConfig",
+  --"lua.gruvboxConfig",
+  "lua.lualineConfig",
+  "lua.telescopeConfig",
+  "lua.nvim-treesitterConfig",
+  "lua.hopConfig",
+  "lua.toggletermConfig",
+  "lua.nuiConfig",
+  "lua.plenaryConfig",
+  "lua.nvim-web-deviconsConfig",
+  "lua.lsp-inlayhintsConfig",
+  "lua.neo-treeConfig",
+}
+
+for i = 1, #pluginsToLoad do
+  require(pluginsToLoad[i])
+end
 
 -- [[ Configure lazy config and setup the plugins to load ]]
 require("lua.lazyConfig").setup(pluginsToLoad)
