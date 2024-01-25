@@ -1,19 +1,10 @@
---[[
-
-  - Lua Tutorial
-  - https://learnxinyminutes.com/docs/lua/
-
-  And then you can explore or search through `:help lua-guide`
-  - https://neovim.io/doc/user/lua-guide.html
-
---]]
+--[[ NeoVim Configuration for David Christensen. ]]
 
 -- Get the directory of the current script and set the package path
 local scriptPath = debug.getinfo(1).source:match("@?(.*[\\/])")
 package.path = scriptPath .. "?.lua;" .. package.path
 
---  NOTE: Setting the leader key must happen before plugins are required (otherwise plugins will use wrong
---  leader)
+--  Setting the leader key must happen before plugins are required (otherwise plugins will use wrong leader)
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
@@ -544,6 +535,16 @@ vim.keymap.set({ "n", "v" }, "<C-h>", "<cmd>wincmd h<cr>", { desc = "Move to win
 vim.keymap.set({ "n", "v" }, "<C-j>", "<cmd>wincmd j<cr>", { desc = "Move to window down" })
 vim.keymap.set({ "n", "v" }, "<C-k>", "<cmd>wincmd k<cr>", { desc = "Move to window up" })
 vim.keymap.set({ "n", "v" }, "<C-l>", "<cmd>wincmd l<cr>", { desc = "Move to window right" })
+
+--[[
+
+  - Lua Tutorial
+  - https://learnxinyminutes.com/docs/lua/
+
+  And then you can explore or search through `:help lua-guide`
+  - https://neovim.io/doc/user/lua-guide.html
+
+--]]
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
